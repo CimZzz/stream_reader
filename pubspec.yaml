@@ -1,10 +1,10 @@
 name: stream_reader
-description: A library help you read stream data when you need.
+description: A library help you control stream, like that fetch data when you read.
 version: 1.0.0
-homepage: https://www.example.com
+homepage: https://github.com/CimZzz/stream_reader
 
 environment:
-  sdk: '>=2.7.0 <3.0.0'
+  sdk: '>=2.2.0 <3.0.0'
 
 #dependencies:
 #  path: ^1.6.0

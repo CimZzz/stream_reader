@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b57f0ab4-73ea-427b-bdf9-9ec532f8dc17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/main.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/byte_buffer_reader.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/byte_operator_reader.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/stream_reader_example.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/stream_reader_base.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/stream_reader.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/stream_reader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/stream_reader.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/stream_reader_test.dart" beforeDir="false" />
-    </list>
+    <list default="true" id="b57f0ab4-73ea-427b-bdf9-9ec532f8dc17" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +80,7 @@
       <workItem from="1588131684668" duration="2325000" />
       <workItem from="1588141685037" duration="1522000" />
       <workItem from="1588143279223" duration="764000" />
-      <workItem from="1588144086057" duration="1008000" />
+      <workItem from="1588144086057" duration="1283000" />
     </task>
     <servers />
   </component>
