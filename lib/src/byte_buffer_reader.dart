@@ -15,7 +15,7 @@ abstract class ByteBufferReader {
 
 	Stream<List<int>> releaseStream();
 
-	FutureOr<List<int>> readUntil({List<int> terminators, bool endTerminate = false});
+	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool endTerminate = false});
 
 	bool isEnd();
 
@@ -164,27 +164,31 @@ class _ByteListBufferReader extends ByteBufferReader {
 
 	/// Read until terminator matched
 	@override
-	FutureOr<List<int>> readUntil({List<int> terminators, bool endTerminate = false}) {
-		if(terminators == null || terminators.isEmpty) {
+	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool endTerminate = false}) {
+		if(terminators == null || terminators.isEmpty || terminators.firstWhere((element) => element.isEmpty, orElse: () => null) != null) {
 			return null;
 		}
 
-		var idx = 0;
+		final count = terminators.length;
+
+		final idxList = List.filled(count, 0);
 
 		return _readLimit(() => _readUntil((byte) {
-			if(byte == terminators[idx]) {
-				// found one byte, will find next byte
-				if(idx == terminators.length - 1) {
-					// completed, stop finding...
-					return true;
-				}
-				idx ++;
-			}
-			else {
-				// reset idx
-				idx = 0;
-			}
+			for(var i = 0 ; i < count ; i ++) {
+				final idx = idxList[i];
+				final terminatorList = terminators[i];
+				if(byte == terminatorList[idx]) {
+					if(idx == terminatorList.length - 1) {
+						// completed, stop finding...
+						return true;
+					}
 
+					idxList[i] += 1;
+				}
+				else {
+					idxList[i] = 0;
+				}
+			}
 			return false;
 		}, endTerminate));
 	}

@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'byte_buffer_reader.dart';
 
-class DataReader {
-    DataReader(this._reader);
+abstract class BaseDataReader {
+	BaseDataReader(this._reader);
 
 	final ByteBufferReader _reader;
 
@@ -11,25 +11,30 @@ class DataReader {
 	FutureOr<List<int>> readBytes({int length}) => _reader.readBytes(length: length);
 
 	/// Read one byte from byte buffer reader
-    FutureOr<int> readOneByte() => _reader.readOneByte();
+	FutureOr<int> readOneByte() => _reader.readOneByte();
 
-    /// Read until terminators match
-    FutureOr<List<int>> readUntil({List<int> terminators, bool endTerminate = false}) => _reader.readUntil(
-	    terminators: terminators,
-	    endTerminate: endTerminate
-    );
+	/// Read until terminators match
+	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool endTerminate = false}) => _reader.readUntil(
+		terminators: terminators,
+		endTerminate: endTerminate
+	);
 
-    /// Release byte buffer reader stream
-    Stream<List<int>> releaseStream() => _reader.releaseStream();
+	/// Release byte buffer reader stream
+	Stream<List<int>> releaseStream() => _reader.releaseStream();
 
 
-    /// Whether the read is down
-    bool isEnd() => _reader.isEnd();
+	/// Whether the read is down
+	bool isEnd() => _reader.isEnd();
 
-    /// Destroy reader
-    void destroy() {
-    	_reader.destroy();
-    }
+	/// Destroy reader
+	void destroy() {
+		_reader.destroy();
+	}
+}
+
+/// Normal Data Reader
+class DataReader extends BaseDataReader {
+    DataReader(ByteBufferReader reader) : super(reader);
 
 	/// Read four-bytes int
     /// - [bigEndian] : Big endian
@@ -52,7 +57,7 @@ class DataReader {
 
 	/// Read one line string
 	FutureOr<String> readString() async {
-		final byteList = await _reader.readUntil(terminators: '\n'.codeUnits, endTerminate: true);
+		final byteList = await _reader.readUntil(terminators: ['\n'.codeUnits], endTerminate: true);
 		if(byteList == null) {
 			return null;
 		}

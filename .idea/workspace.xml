@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b57f0ab4-73ea-427b-bdf9-9ec532f8dc17" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/stream_reader.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/stream_reader.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/byte_buffer_reader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/byte_buffer_reader.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/byte_operator_reader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/byte_operator_reader.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,7 +91,7 @@
       <workItem from="1588141685037" duration="1522000" />
       <workItem from="1588143279223" duration="764000" />
       <workItem from="1588144086057" duration="1683000" />
-      <workItem from="1588146515723" duration="325000" />
+      <workItem from="1588146515723" duration="3513000" />
     </task>
     <servers />
   </component>
