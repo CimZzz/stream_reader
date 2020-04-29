@@ -7,5 +7,8 @@ A library help you control stream, like that fetch data when you read.
 add in pubspec.yaml, like this:
 
 ```yaml
-stream_reader: ^1.0.3
+stream_reader: ^1.0.4
 ```
+
+## Usage
+

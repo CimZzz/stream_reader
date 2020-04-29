@@ -30,9 +30,14 @@ class StreamReader<T> {
 			}
 			else {
 				// read waiting, add to completer
-				_readCompleter.complete(event);
-				_readCompleter = null;
-				_subscription.pause();
+				if(_readCompleter != null) {
+					_readCompleter.complete(event);
+					_readCompleter = null;
+				}
+				else {
+					_bufferEvent = event;
+					_subscription.pause();
+				}
 			}
 		}, onError: (error, stackTrace) {
 			if (_isRelease) {
@@ -47,7 +52,6 @@ class StreamReader<T> {
 		}, onDone: () {
 			destroy();
 		});
-		_subscription.pause();
 	}
 
 	/// Stream Subscription
@@ -59,6 +63,9 @@ class StreamReader<T> {
 	/// Read Completer
 	Completer<T> _readCompleter;
 
+	/// Data Buffer
+	T _bufferEvent;
+	
 	/// Whether stream is released
 	var _isRelease = false;
 
@@ -71,15 +78,19 @@ class StreamReader<T> {
 
 	/// Read first data of current data stream
 	/// If stream is released or end, return null
-	Future<T> read() async {
+	FutureOr<T> read() async {
 		if (_isEnd || _isRelease) {
 			return null;
 		}
-
-		if (_readCompleter == null) {
-			_readCompleter = Completer();
+		
+		if(_bufferEvent != null) {
+			final tempBuffer = _bufferEvent;
+			_bufferEvent = null;
 			_subscription.resume();
+			return tempBuffer;
 		}
+
+		_readCompleter ??= Completer();
 
 		return _readCompleter.future;
 	}
@@ -87,9 +98,9 @@ class StreamReader<T> {
 	/// Release the stream
 	/// If stream is released or end, return null
 	/// If current is waiting for reading, complete `null` directly
-	Stream<T> releaseStream() {
+	Stream<T> releaseStream() async* {
 		if (_isEnd || _isRelease) {
-			return null;
+			return;
 		}
 		_isRelease = true;
 		_subscription.resume();
@@ -97,17 +108,25 @@ class StreamReader<T> {
 			_readCompleter.complete(null);
 			_readCompleter = null;
 		}
+		
+		if(_bufferEvent != null) {
+			final tempBuffer = _bufferEvent;
+			_bufferEvent = null;
+			yield tempBuffer;
+		}
+		
 		_releaseController = StreamController();
-		return _releaseController.stream;
+		yield* _releaseController.stream;
 	}
 
 	/// Destroy StreamReader
 	void destroy() {
 		if (!_isEnd) {
 			_isEnd = true;
+			_bufferEvent = null;
 			if (_isRelease) {
 				// stream released, close controller
-				_releaseController.close();
+				_releaseController?.close();
 			}
 			else if (_readCompleter != null) {
 				// if wait reading now, complete `null`

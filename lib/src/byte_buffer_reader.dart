@@ -17,7 +17,7 @@ abstract class ByteBufferReader {
 
 	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool needRemoveTerminator = false, bool endTerminate = false});
 
-	bool isEnd();
+	bool get isEnd;
 
 	void destroy();
 }
@@ -211,19 +211,20 @@ class _ByteListBufferReader extends ByteBufferReader {
 
 	/// Release data stream
 	@override
-	Stream<List<int>> releaseStream() {
-		return _readLimit(() async* {
+	Stream<List<int>> releaseStream() async* {
+		final future = _readLimit(() async* {
 			isRelease = true;
 			if(_buffer != null) {
 				yield _buffer;
 			}
 			yield* _reader.releaseStream();
 		});
+		yield* await future;
 	}
 
 	/// Whether the read is down
 	@override
-	bool isEnd() => _reader.isEnd;
+	bool get isEnd => _reader.isEnd;
 
 	/// Destroy reader
 	@override

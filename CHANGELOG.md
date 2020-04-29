@@ -14,3 +14,7 @@
 ## 1.0.3
 
 - `readUtils' method can remove terminators
+
+## 1.0.4
+
+- add `utils.dart`

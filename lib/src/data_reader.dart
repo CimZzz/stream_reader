@@ -25,7 +25,7 @@ abstract class BaseDataReader {
 
 
 	/// Whether the read is down
-	bool isEnd() => _reader.isEnd();
+	bool get isEnd => _reader.isEnd;
 
 	/// Destroy reader
 	void destroy() {
