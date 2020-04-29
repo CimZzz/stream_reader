@@ -15,7 +15,7 @@ abstract class ByteBufferReader {
 
 	Stream<List<int>> releaseStream();
 
-	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool endTerminate = false});
+	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool needRemoveTerminator = false, bool endTerminate = false});
 
 	bool isEnd();
 
@@ -63,22 +63,31 @@ class _ByteListBufferReader extends ByteBufferReader {
 	}
 
 	/// Read byte data until [predict] return true
-	FutureOr<List<int>> _readUntil(bool Function(int) predict, bool endTerminate) async {
+	FutureOr<List<int>> _readUntil(int Function(int) predict, bool needRemoveTerminator, bool endTerminate) async {
 		// visit buffer first
+		needRemoveTerminator ??= false;
+		endTerminate ??= false;
 		int count;
 		if(_buffer != null) {
 			count = _buffer.length;
 			for(var i = 0 ; i < count ; i ++) {
-				if(predict(_buffer[i])) {
+				final result = predict(_buffer[i]);
+				if(result != 0) {
 					// 中断
 					if(i == count - 1) {
 						final tempList = _buffer;
 						_buffer = null;
+						if(needRemoveTerminator) {
+							tempList.removeRange(tempList.length - result, tempList.length);
+						}
 						return tempList;
 					}
 					else {
 						final tempList = _buffer.sublist(0, i + 1);
 						_buffer = _buffer.sublist(i + 1);
+						if(needRemoveTerminator) {
+							tempList.removeRange(tempList.length - result, tempList.length);
+						}
 						return tempList;
 					}
 				}
@@ -98,17 +107,24 @@ class _ByteListBufferReader extends ByteBufferReader {
 			}
 			count = newBuffer.length;
 			for(var i = 0 ; i < count ; i ++) {
-				if(predict(newBuffer[i])) {
+				final result = predict(newBuffer[i]);
+				if(result != 0) {
 					// 中断
 					if(i == count - 1) {
 
 						final tempList = _buffer != null ? _buffer + newBuffer : newBuffer;
 						_buffer = null;
+						if(needRemoveTerminator) {
+							tempList.removeRange(tempList.length - result, tempList.length);
+						}
 						return tempList;
 					}
 					else {
 						final tempList = _buffer != null ? _buffer + newBuffer.sublist(0, i + 1) : newBuffer.sublist(0, i + 1);
 						_buffer = newBuffer.sublist(i + 1);
+						if(needRemoveTerminator) {
+							tempList.removeRange(tempList.length - result, tempList.length);
+						}
 						return tempList;
 					}
 				}
@@ -164,7 +180,7 @@ class _ByteListBufferReader extends ByteBufferReader {
 
 	/// Read until terminator matched
 	@override
-	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool endTerminate = false}) {
+	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool needRemoveTerminator = false, bool endTerminate = false}) {
 		if(terminators == null || terminators.isEmpty || terminators.firstWhere((element) => element.isEmpty, orElse: () => null) != null) {
 			return null;
 		}
@@ -180,7 +196,7 @@ class _ByteListBufferReader extends ByteBufferReader {
 				if(byte == terminatorList[idx]) {
 					if(idx == terminatorList.length - 1) {
 						// completed, stop finding...
-						return true;
+						return idx + 1;
 					}
 
 					idxList[i] += 1;
@@ -189,8 +205,8 @@ class _ByteListBufferReader extends ByteBufferReader {
 					idxList[i] = 0;
 				}
 			}
-			return false;
-		}, endTerminate));
+			return 0;
+		}, needRemoveTerminator, endTerminate));
 	}
 
 	/// Release data stream

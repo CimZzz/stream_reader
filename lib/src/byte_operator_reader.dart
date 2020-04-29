@@ -14,9 +14,10 @@ abstract class BaseDataReader {
 	FutureOr<int> readOneByte() => _reader.readOneByte();
 
 	/// Read until terminators match
-	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool endTerminate = false}) => _reader.readUntil(
+	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool needRemoveTerminator = false, bool endTerminate = false}) => _reader.readUntil(
 		terminators: terminators,
-		endTerminate: endTerminate
+		needRemoveTerminator: needRemoveTerminator,
+		endTerminate: endTerminate,
 	);
 
 	/// Release byte buffer reader stream
@@ -56,8 +57,8 @@ class DataReader extends BaseDataReader {
 	}
 
 	/// Read one line string
-	FutureOr<String> readString() async {
-		final byteList = await _reader.readUntil(terminators: ['\n'.codeUnits], endTerminate: true);
+	FutureOr<String> readString({bool keepLineBreak = true}) async {
+		final byteList = await _reader.readUntil(terminators: ['\n'.codeUnits], needRemoveTerminator: !keepLineBreak,endTerminate: true);
 		if(byteList == null) {
 			return null;
 		}

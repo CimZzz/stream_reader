@@ -1,6 +1,6 @@
 name: stream_data_reader
 description: A library help you control stream, like that fetch data when you read.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/CimZzz/stream_reader
 
 environment:

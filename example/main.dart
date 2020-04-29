@@ -8,7 +8,6 @@ Stream<List<int>> ss() async* {
 void main() async {
 	final reader = ByteBufferReader(StreamReader(ss()));
 	final dataReader = DataReader(reader);
-	print(await dataReader.readString());
-	print(await dataReader.readString());
-	print(await dataReader.readString());
+	print(await dataReader.readUntil(terminators: ['\r\n'.codeUnits, '\r'.codeUnits], needRemoveTerminator: true, endTerminate: true));
+//	print(await dataReader.readUntil(terminators: ['\r\n'.codeUnits], endTerminate: true));
 }

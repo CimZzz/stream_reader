@@ -10,3 +10,7 @@
 ## 1.0.2
 
 - `readUntil` method can match more terminators
+
+## 1.0.3
+
+- `readUtils' method can remove terminators
