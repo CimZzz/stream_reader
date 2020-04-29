@@ -3,7 +3,7 @@ import 'dart:async';
 import 'stream_reader.dart';
 
 abstract class ByteBufferReader {
-	factory ByteBufferReader.byteListReader(StreamReader<List<int>> streamReader) {
+	factory ByteBufferReader(StreamReader<List<int>> streamReader) {
 		return _ByteListBufferReader(streamReader);
 	}
 
@@ -16,6 +16,8 @@ abstract class ByteBufferReader {
 	Stream<List<int>> releaseStream();
 
 	FutureOr<List<int>> readUntil({List<int> terminators, bool endTerminate = false});
+
+	bool isEnd();
 
 	void destroy();
 }
@@ -198,6 +200,10 @@ class _ByteListBufferReader extends ByteBufferReader {
 			yield* _reader.releaseStream();
 		});
 	}
+
+	/// Whether the read is down
+	@override
+	bool isEnd() => _reader.isEnd;
 
 	/// Destroy reader
 	@override

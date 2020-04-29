@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b57f0ab4-73ea-427b-bdf9-9ec532f8dc17" name="Default Changelist" comment="" />
+    <list default="true" id="b57f0ab4-73ea-427b-bdf9-9ec532f8dc17" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/stream_reader.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/byte_buffer_reader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/byte_buffer_reader.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/byte_operator_reader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/byte_operator_reader.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/stream_reader.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +41,7 @@
   <component name="ProjectId" id="1bCKPAr6DAUyJzf2a7pAFexflnk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
@@ -80,7 +94,8 @@
       <workItem from="1588131684668" duration="2325000" />
       <workItem from="1588141685037" duration="1522000" />
       <workItem from="1588143279223" duration="764000" />
-      <workItem from="1588144086057" duration="1283000" />
+      <workItem from="1588144086057" duration="1683000" />
+      <workItem from="1588146515723" duration="212000" />
     </task>
     <servers />
   </component>

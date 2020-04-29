@@ -1,4 +1,4 @@
-name: stream_reader
+name: stream_data_reader
 description: A library help you control stream, like that fetch data when you read.
 version: 1.0.0
 homepage: https://github.com/CimZzz/stream_reader

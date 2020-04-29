@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
-import 'package:stream_reader/src/byte_buffer_reader.dart';
+import 'byte_buffer_reader.dart';
 
 class DataReader {
     DataReader(this._reader);
@@ -14,16 +13,22 @@ class DataReader {
 	/// Read one byte from byte buffer reader
     FutureOr<int> readOneByte() => _reader.readOneByte();
 
-    /// Release byte buffer reader stream
-    Stream<List<int>> releaseStream() => _reader.releaseStream();
-
+    /// Read until terminators match
     FutureOr<List<int>> readUntil({List<int> terminators, bool endTerminate = false}) => _reader.readUntil(
 	    terminators: terminators,
 	    endTerminate: endTerminate
     );
 
+    /// Release byte buffer reader stream
+    Stream<List<int>> releaseStream() => _reader.releaseStream();
+
+
+    /// Whether the read is down
+    bool isEnd() => _reader.isEnd();
+
+    /// Destroy reader
     void destroy() {
-    	
+    	_reader.destroy();
     }
 
 	/// Read four-bytes int
