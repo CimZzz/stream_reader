@@ -18,3 +18,7 @@
 ## 1.0.4
 
 - add `utils.dart`
+
+## 1.0.5
+
+- fix terminators remove bug

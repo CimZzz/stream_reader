@@ -78,17 +78,21 @@ class _ByteListBufferReader extends ByteBufferReader {
 						final tempList = _buffer;
 						_buffer = null;
 						if(needRemoveTerminator) {
-							tempList.removeRange(tempList.length - result, tempList.length);
+							return tempList.sublist(0, tempList.length - result);
 						}
-						return tempList;
+						else {
+							return tempList;
+						}
 					}
 					else {
 						final tempList = _buffer.sublist(0, i + 1);
 						_buffer = _buffer.sublist(i + 1);
 						if(needRemoveTerminator) {
-							tempList.removeRange(tempList.length - result, tempList.length);
+							return tempList.sublist(0, tempList.length - result);
 						}
-						return tempList;
+						else {
+							return tempList;
+						}
 					}
 				}
 			}
@@ -115,17 +119,21 @@ class _ByteListBufferReader extends ByteBufferReader {
 						final tempList = _buffer != null ? _buffer + newBuffer : newBuffer;
 						_buffer = null;
 						if(needRemoveTerminator) {
-							tempList.removeRange(tempList.length - result, tempList.length);
+							return tempList.sublist(0, tempList.length - result);
 						}
-						return tempList;
+						else {
+							return tempList;
+						}
 					}
 					else {
 						final tempList = _buffer != null ? _buffer + newBuffer.sublist(0, i + 1) : newBuffer.sublist(0, i + 1);
 						_buffer = newBuffer.sublist(i + 1);
 						if(needRemoveTerminator) {
-							tempList.removeRange(tempList.length - result, tempList.length);
+							return tempList.sublist(0, tempList.length - result);
 						}
-						return tempList;
+						else {
+							return tempList;
+						}
 					}
 				}
 			}
