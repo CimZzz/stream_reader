@@ -37,6 +37,21 @@ abstract class BaseDataReader {
 class DataReader extends BaseDataReader {
     DataReader(ByteBufferReader reader) : super(reader);
 
+    /// Read two-bytes int
+    /// - [bigEndian] : Big endian
+    FutureOr<int> readShort({bool bigEndian = true,}) async {
+	    final byteList = await readBytes(length: 2);
+	    bigEndian ??= true;
+	    if(bigEndian) {
+		    return ((byteList[0] & 0xFF) << 8)
+		    | ((byteList[1] & 0xFF));
+	    }
+	    else {
+		    return ((byteList[1] & 0xFF) << 8)
+		    | ((byteList[0] & 0xFF));
+	    }
+    }
+
 	/// Read four-bytes int
     /// - [bigEndian] : Big endian
 	FutureOr<int> readInt({bool bigEndian = true,}) async {

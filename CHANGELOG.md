@@ -22,3 +22,7 @@
 ## 1.0.5
 
 - fix terminators remove bug
+
+## 1.0.6
+
+- add `readShort` method

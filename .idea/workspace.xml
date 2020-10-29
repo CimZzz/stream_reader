@@ -4,7 +4,8 @@
     <list default="true" id="b57f0ab4-73ea-427b-bdf9-9ec532f8dc17" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/byte_buffer_reader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/byte_buffer_reader.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/data_reader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/data_reader.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -90,6 +91,9 @@
       <workItem from="1588146515723" duration="3666000" />
       <workItem from="1588159005643" duration="591000" />
       <workItem from="1588167635420" duration="5001000" />
+      <workItem from="1592219366571" duration="289000" />
+      <workItem from="1592288420447" duration="15000" />
+      <workItem from="1603969914935" duration="226000" />
     </task>
     <servers />
   </component>
