@@ -5,6 +5,8 @@ Stream<List<int>> testStream() async* {
 	yield [0x00, 0x00, 0x00, 0x01];
 }
 
+final list = [0x00, 0x00, 0x01, 0x00];
+
 void main() async {
 	final dataReader = DataReader(ByteBufferReader(StreamReader(testStream())));
 	print(await dataReader.readInt());

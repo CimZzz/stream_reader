@@ -26,3 +26,7 @@
 ## 1.0.6
 
 - add `readShort` method
+
+## 1.0.7
+
+- add `formatter` utils
