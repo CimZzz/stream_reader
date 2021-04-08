@@ -24,7 +24,8 @@ abstract class ByteBufferReader {
 
 /// Byte list buffer reader
 class _ByteListBufferReader extends ByteBufferReader {
-	_ByteListBufferReader(StreamReader<List<int>> streamReader):
+	_ByteListBufferReader(StreamReader<List<int>> streamReader)
+		:
 			_reader = streamReader,
 			super._();
 
@@ -45,10 +46,10 @@ class _ByteListBufferReader extends ByteBufferReader {
 
 	/// Prevent more time call [read] method at moment.
 	FutureOr<T> _readLimit<T>(FutureOr<T> Function() runnable) async {
-		if(isRelease) {
+		if (isRelease) {
 			throw Exception('Reader is released...');
 		}
-		if(isReading) {
+		if (isReading) {
 			throw Exception('Cannot read at the same time');
 		}
 		final result = await runnable();
@@ -68,16 +69,16 @@ class _ByteListBufferReader extends ByteBufferReader {
 		needRemoveTerminator ??= false;
 		endTerminate ??= false;
 		int count;
-		if(_buffer != null) {
+		if (_buffer != null) {
 			count = _buffer.length;
-			for(var i = 0 ; i < count ; i ++) {
+			for (var i = 0; i < count; i ++) {
 				final result = predict(_buffer[i]);
-				if(result != 0) {
+				if (result != 0) {
 					// 中断
-					if(i == count - 1) {
+					if (i == count - 1) {
 						final tempList = _buffer;
 						_buffer = null;
-						if(needRemoveTerminator) {
+						if (needRemoveTerminator) {
 							return tempList.sublist(0, tempList.length - result);
 						}
 						else {
@@ -87,7 +88,7 @@ class _ByteListBufferReader extends ByteBufferReader {
 					else {
 						final tempList = _buffer.sublist(0, i + 1);
 						_buffer = _buffer.sublist(i + 1);
-						if(needRemoveTerminator) {
+						if (needRemoveTerminator) {
 							return tempList.sublist(0, tempList.length - result);
 						}
 						else {
@@ -99,10 +100,10 @@ class _ByteListBufferReader extends ByteBufferReader {
 		}
 
 		// buffer not enough, visit more data
-		while(true) {
+		while (true) {
 			final newBuffer = await _readFromReader();
-			if(newBuffer == null) {
-				if(endTerminate) {
+			if (newBuffer == null) {
+				if (endTerminate) {
 					final tempList = _buffer;
 					_buffer = null;
 					return tempList;
@@ -110,15 +111,14 @@ class _ByteListBufferReader extends ByteBufferReader {
 				throw Exception('not enough bytes');
 			}
 			count = newBuffer.length;
-			for(var i = 0 ; i < count ; i ++) {
+			for (var i = 0; i < count; i ++) {
 				final result = predict(newBuffer[i]);
-				if(result != 0) {
+				if (result != 0) {
 					// 中断
-					if(i == count - 1) {
-
+					if (i == count - 1) {
 						final tempList = _buffer != null ? _buffer + newBuffer : newBuffer;
 						_buffer = null;
-						if(needRemoveTerminator) {
+						if (needRemoveTerminator) {
 							return tempList.sublist(0, tempList.length - result);
 						}
 						else {
@@ -128,7 +128,7 @@ class _ByteListBufferReader extends ByteBufferReader {
 					else {
 						final tempList = _buffer != null ? _buffer + newBuffer.sublist(0, i + 1) : newBuffer.sublist(0, i + 1);
 						_buffer = newBuffer.sublist(i + 1);
-						if(needRemoveTerminator) {
+						if (needRemoveTerminator) {
 							return tempList.sublist(0, tempList.length - result);
 						}
 						else {
@@ -137,7 +137,7 @@ class _ByteListBufferReader extends ByteBufferReader {
 					}
 				}
 			}
-			if(_buffer == null) {
+			if (_buffer == null) {
 				_buffer = newBuffer;
 			}
 			else {
@@ -150,21 +150,21 @@ class _ByteListBufferReader extends ByteBufferReader {
 	@override
 	FutureOr<List<int>> readBytes({int length}) {
 		return _readLimit<List<int>>(() async {
-			if(_buffer == null) {
+			if (_buffer == null) {
 				_buffer = await _readFromReader();
-				if(_buffer == null) {
+				if (_buffer == null) {
 					throw Exception('not enough bytes');
 				}
 			}
-			while(_buffer.length < length) {
+			while (_buffer.length < length) {
 				final readByteList = await _readFromReader();
-				if(readByteList == null) {
+				if (readByteList == null) {
 					throw Exception('not enough bytes');
 				}
 				_buffer += readByteList;
 			}
 			List<int> tempList;
-			if(_buffer.length == length) {
+			if (_buffer.length == length) {
 				tempList = _buffer;
 				_buffer = null;
 			}
@@ -189,7 +189,7 @@ class _ByteListBufferReader extends ByteBufferReader {
 	/// Read until terminator matched
 	@override
 	FutureOr<List<int>> readUntil({List<List<int>> terminators, bool needRemoveTerminator = false, bool endTerminate = false}) {
-		if(terminators == null || terminators.isEmpty || terminators.firstWhere((element) => element.isEmpty, orElse: () => null) != null) {
+		if (terminators == null || terminators.isEmpty || terminators.firstWhere((element) => element.isEmpty, orElse: () => null) != null) {
 			return null;
 		}
 
@@ -197,24 +197,25 @@ class _ByteListBufferReader extends ByteBufferReader {
 
 		final idxList = List.filled(count, 0);
 
-		return _readLimit(() => _readUntil((byte) {
-			for(var i = 0 ; i < count ; i ++) {
-				final idx = idxList[i];
-				final terminatorList = terminators[i];
-				if(byte == terminatorList[idx]) {
-					if(idx == terminatorList.length - 1) {
-						// completed, stop finding...
-						return idx + 1;
-					}
+		return _readLimit(() =>
+			_readUntil((byte) {
+				for (var i = 0; i < count; i ++) {
+					final idx = idxList[i];
+					final terminatorList = terminators[i];
+					if (byte == terminatorList[idx]) {
+						if (idx == terminatorList.length - 1) {
+							// completed, stop finding...
+							return idx + 1;
+						}
 
-					idxList[i] += 1;
+						idxList[i] += 1;
+					}
+					else {
+						idxList[i] = 0;
+					}
 				}
-				else {
-					idxList[i] = 0;
-				}
-			}
-			return 0;
-		}, needRemoveTerminator, endTerminate));
+				return 0;
+			}, needRemoveTerminator, endTerminate));
 	}
 
 	/// Release data stream
@@ -222,7 +223,7 @@ class _ByteListBufferReader extends ByteBufferReader {
 	Stream<List<int>> releaseStream() async* {
 		final future = _readLimit(() async* {
 			isRelease = true;
-			if(_buffer != null) {
+			if (_buffer != null) {
 				yield _buffer;
 			}
 			yield* _reader.releaseStream();

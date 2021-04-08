@@ -27,12 +27,11 @@ typedef ByteStreamTransformer<T> = FutureOr<T> Function(DataReader reader);
 ///
 Stream<T> transformByteStream<T>(Stream<List<int>> rawStream, ByteStreamTransformer<T> builder) async* {
 	final reader = DataReader(ByteBufferReader(StreamReader(rawStream)));
-	while(!reader.isEnd) {
+	while (!reader.isEnd) {
 		final transformedData = await builder(reader);
 		yield transformedData;
 	}
 }
-
 
 
 typedef StreamTransformer<T, E> = FutureOr<E> Function(StreamReader<T> reader);
@@ -63,7 +62,7 @@ typedef StreamTransformer<T, E> = FutureOr<E> Function(StreamReader<T> reader);
 ///
 Stream<E> transformStream<T, E>(Stream<T> rawStream, StreamTransformer<T, E> builder) async* {
 	final reader = StreamReader<T>(rawStream);
-	while(!reader.isEnd) {
+	while (!reader.isEnd) {
 		final transformedData = await builder(reader);
 		yield transformedData;
 	}

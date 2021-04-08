@@ -30,7 +30,7 @@ class StreamReader<T> {
 			}
 			else {
 				// read waiting, add to completer
-				if(_readCompleter != null) {
+				if (_readCompleter != null) {
 					_readCompleter.complete(event);
 					_readCompleter = null;
 				}
@@ -65,7 +65,7 @@ class StreamReader<T> {
 
 	/// Data Buffer
 	T _bufferEvent;
-	
+
 	/// Whether stream is released
 	var _isRelease = false;
 
@@ -82,8 +82,8 @@ class StreamReader<T> {
 		if (_isEnd || _isRelease) {
 			return null;
 		}
-		
-		if(_bufferEvent != null) {
+
+		if (_bufferEvent != null) {
 			final tempBuffer = _bufferEvent;
 			_bufferEvent = null;
 			_subscription.resume();
@@ -108,13 +108,13 @@ class StreamReader<T> {
 			_readCompleter.complete(null);
 			_readCompleter = null;
 		}
-		
-		if(_bufferEvent != null) {
+
+		if (_bufferEvent != null) {
 			final tempBuffer = _bufferEvent;
 			_bufferEvent = null;
 			yield tempBuffer;
 		}
-		
+
 		_releaseController = StreamController();
 		yield* _releaseController.stream;
 	}

@@ -10,8 +10,8 @@ class DataFormatter {
 	static int byte2Int(Iterable<int> bytes, {bool isBigEndian = false}) {
 		var number = 0;
 		var mul = 0;
-		for(final byte in bytes) {
-			if(isBigEndian ?? false) {
+		for (final byte in bytes) {
+			if (isBigEndian ?? false) {
 				number = (number << 8) | (byte & 0xFF);
 			}
 			else {
@@ -29,7 +29,7 @@ class DataFormatter {
 	/// Also can specify byteCount, make sure byte list's length as result
 	static Iterable<int> int2Byte(int number, {int byteCount, bool isBigEndian = false}) sync* {
 		final byteList = <int>[];
-		while(number > 0) {
+		while (number > 0) {
 			byteList.add(number & 0xFF);
 			number = number >> 8;
 		}
@@ -37,9 +37,9 @@ class DataFormatter {
 
 		final listCount = byteList.length;
 		final realCount = byteCount ?? listCount;
-		if(isBigEndian ?? false) {
-			for(var i = realCount - 1 ; i >= 0 ; i --) {
-				if(i >= listCount) {
+		if (isBigEndian ?? false) {
+			for (var i = realCount - 1; i >= 0; i --) {
+				if (i >= listCount) {
 					yield 0;
 				}
 				else {
@@ -48,8 +48,8 @@ class DataFormatter {
 			}
 		}
 		else {
-			for(var i = 0 ; i < realCount ; i ++) {
-				if(i >= listCount) {
+			for (var i = 0; i < realCount; i ++) {
+				if (i >= listCount) {
 					yield 0;
 				}
 				else {
@@ -64,7 +64,7 @@ class DataFormatter {
 	///
 	/// * Must have 4 bytes enough, if bytes over 4 bytes, begin from `offset` , default is 0
 	static double byte2Float32(List<int> bytes, {int offset = 0, bool isBigEndian = false}) {
-		if(bytes == null || bytes.length - offset + 1 < 4) {
+		if (bytes == null || bytes.length - offset + 1 < 4) {
 			throw Exception('not enough bytes');
 		}
 
@@ -87,7 +87,7 @@ class DataFormatter {
 	///
 	/// * Must have 8 bytes enough, if bytes over 8 bytes, begin from `offset` , default is 0
 	static double byte2Float64(List<int> bytes, {int offset = 0, bool isBigEndian = false}) {
-		if(bytes == null || bytes.length - offset + 1 < 8) {
+		if (bytes == null || bytes.length - offset + 1 < 8) {
 			throw Exception('not enough bytes');
 		}
 
