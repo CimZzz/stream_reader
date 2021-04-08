@@ -30,3 +30,7 @@
 ## 1.0.7
 
 - add `formatter` utils
+
+## 1.0.8
+
+- add `Float32 / Float64` convert / reverse bytes method

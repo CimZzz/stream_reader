@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 /// Data formatter
 /// A class can help you convert byte data to base type or vice versa.
 class DataFormatter {
@@ -55,5 +57,51 @@ class DataFormatter {
 				}
 			}
 		}
+	}
+
+	/// Bytes -> Float32
+	/// Specify byte order, big endian or little endian, default is little endian
+	///
+	/// * Must have 4 bytes enough, if bytes over 4 bytes, begin from `offset` , default is 0
+	static double byte2Float32(List<int> bytes, {int offset = 0, bool isBigEndian = false}) {
+		if(bytes == null || bytes.length - offset + 1 < 4) {
+			throw Exception('not enough bytes');
+		}
+
+		final intData = byte2Int(bytes.sublist(offset, offset + 4), isBigEndian: isBigEndian);
+		final data = ByteData(4);
+		data.setInt32(0, intData);
+		return data.getFloat32(0, isBigEndian ? Endian.big : Endian.little);
+	}
+
+	/// Float32 -> Bytes
+	/// Specify byte order, big endian or little endian, default is little endian
+	static Iterable<int> float32ToByte(double float, {bool isBigEndian = false}) {
+		final data = ByteData(4);
+		data.setFloat32(0, float);
+		return data.buffer.asInt8List();
+	}
+
+	/// Bytes -> Float64
+	/// Specify byte order, big endian or little endian, default is little endian
+	///
+	/// * Must have 8 bytes enough, if bytes over 8 bytes, begin from `offset` , default is 0
+	static double byte2Float64(List<int> bytes, {int offset = 0, bool isBigEndian = false}) {
+		if(bytes == null || bytes.length - offset + 1 < 8) {
+			throw Exception('not enough bytes');
+		}
+
+		final intData = byte2Int(bytes.sublist(offset, offset + 8), isBigEndian: isBigEndian);
+		final data = ByteData(8);
+		data.setInt64(0, intData);
+		return data.getFloat64(0, isBigEndian ? Endian.big : Endian.little);
+	}
+
+	/// Float64 -> Bytes
+	/// Specify byte order, big endian or little endian, default is little endian
+	static Iterable<int> float64ToByte(double float, {bool isBigEndian = false}) {
+		final data = ByteData(8);
+		data.setFloat64(0, float);
+		return data.buffer.asInt8List();
 	}
 }

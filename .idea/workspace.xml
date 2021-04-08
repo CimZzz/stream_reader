@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b57f0ab4-73ea-427b-bdf9-9ec532f8dc17" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/src/formatter.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/example1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/example1.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/stream_data_reader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/stream_data_reader.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/formatter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/formatter.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -96,7 +93,9 @@
       <workItem from="1592219366571" duration="289000" />
       <workItem from="1592288420447" duration="15000" />
       <workItem from="1603969914935" duration="336000" />
-      <workItem from="1617344207054" duration="2717000" />
+      <workItem from="1617344207054" duration="2769000" />
+      <workItem from="1617348981608" duration="602000" />
+      <workItem from="1617851333912" duration="1008000" />
     </task>
     <servers />
   </component>
@@ -115,5 +114,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$USER_HOME$/Library/flutter/bin/cache/dart-sdk/lib/typed_data/unmodifiable_typed_data.dart</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
